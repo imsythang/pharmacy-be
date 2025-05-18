@@ -45,7 +45,10 @@ git clone https://github.com/imsythang/pharmacy-be.git
 cd pharmacy-be
 yarn install
 ```
-
+## Pull lastest code
+```bash
+git pull origin main
+```
 ### 🧪 Environment Variables
 
 Tạo file `.env`:
@@ -116,6 +119,28 @@ Truy cập [http://localhost:3001/api/docs](http://localhost:3001/api/docs)
 - [ ] Add Dockerfile + CI/CD for deployment
 
 ---
+
+## 📤 Git Commands (for collaboration)
+
+### 🧑‍💻 If you've cloned before & already committed before
+
+```bash
+git pull origin main                 # Pull latest changes
+git add .                            # Stage all modified files
+git commit -m "..."                  # Add your message
+git push origin main                 # Push to remote
+```
+
+### 🆕 If this is your first time committing to the repo
+
+```bash
+git init                             # Initialize git (if not already)
+git remote add origin https://github.com/imsythang/pharmacy-be.git
+git checkout -b main                 # Create & switch to 'main' branch
+git add .                            # Stage all files
+git commit -m "..."                  # First commit message
+git push -u origin main              # Push and track remote branch
+```
 
 ## 📄 License
 
