@@ -11,6 +11,19 @@
 
 ---
 
+<p align="center">
+  <img src="https://nestjs.com/img/logo-small.svg" width="100" alt="NestJS Logo" />
+</p>
+
+<h1 align="center">Pharmacy Backend</h1>
+
+<p align="center">
+  <b>A scalable backend built with NestJS for managing pharmacy operations.</b><br />
+  <sub>Crafted with ❤️ by <strong>Hồ Sỹ Thắng</strong> (contact: hothang2004@gmail.com)</sub>
+</p>
+
+---
+
 ## 🚀 Tech Stack
 
 - ⚙️ **NestJS** - Scalable and maintainable Node.js framework
@@ -109,7 +122,7 @@ Truy cập [http://localhost:3001/api/docs](http://localhost:3001/api/docs)
 
 ---
 
-## 🧩 To-Do / Enhancements
+## 🧹 To-Do / Enhancements
 
 - [ ] Add password reset flow
 - [ ] Admin dashboard with analytics
