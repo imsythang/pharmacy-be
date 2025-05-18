@@ -1,146 +1,124 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+  <img src="https://nestjs.com/img/logo-small.svg" width="100" alt="NestJS Logo" />
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<h1 align="center">Pharmacy Backend</h1>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
+<p align="center">
+  <b>A scalable backend built with NestJS for managing pharmacy operations.</b><br />
+  <sub>Crafted with ❤️ by <strong>Hồ Sỹ Thắng</strong> (contact: hothang2004@gmail.com)</sub>
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-# Pharmacy Backend
+---
 
-This is the backend service for the Pharmacy project, built with NestJS.
+## 🚀 Tech Stack
 
-## Description
+- ⚙️ **NestJS** - Scalable and maintainable Node.js framework
+- 🔐 **OAuth2** (Google & Facebook) - Secure authentication
+- 🧠 **JWT + Refresh Tokens** - Stateless session management
+- 📦 **Prisma + PostgreSQL** - Modern ORM and reliable database
+- 🌐 **Swagger** - Auto-generated API documentation
+- 🛡 **Helmet, Rate Limit, Sanitization** - Security best practices
 
-A modern pharmacy management system backend with features including:
+---
 
-- User authentication and authorization
-- Product management
-- Order processing
-- Article management
-- Security features
-
-## Installation
+## 📁 Project Structure
 
 ```bash
-$ npm install
+src
+├── auth           # Login, Register, OAuth2 (Google, Facebook)
+├── products       # Medicine & product management
+├── orders         # Order placement & tracking
+├── articles       # Health news management
+├── prisma         # PrismaService
+├── common         # Filters, guards, interceptors
+├── shared         # Shared modules & helpers
+└── main.ts        # App bootstrap
 ```
 
-## Environment Variables
+---
 
-Create a `.env` file in the root directory with the following variables:
+## 📦 Installation
+
+```bash
+git clone https://github.com/your-username/pharmacy-backend.git
+cd pharmacy-backend
+yarn install
+```
+
+### 🧪 Environment Variables
+
+Tạo file `.env`:
 
 ```env
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/pharmacy?schema=public"
-JWT_SECRET="your-super-secret-key-here"
-PORT=3000
+DATABASE_URL="postgresql://youruser:yourpass@localhost:5432/pharmacy?schema=public"
+JWT_SECRET="your-super-secret"
+JWT_EXPIRES_IN="1d"
+PORT=3001
+
+# Google OAuth
+GOOGLE_CLIENT_ID=...
+GOOGLE_CLIENT_SECRET=...
+CALLBACK_URL=http://localhost:3001/auth
 ```
 
-## Database Setup
+---
 
-1. Install PostgreSQL if you haven't already
-2. Create a new database named 'pharmacy'
-3. Run the Prisma migrations:
+## 🧱 Database Setup
 
 ```bash
-$ npx prisma migrate dev
+npx prisma migrate dev --name init
+npx prisma generate
 ```
 
-## Running the app
+---
+
+## 🛠 Run Locally
 
 ```bash
-# development
-$ npm run start
+# Dev mode with hot reload
+yarn start:dev
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+# Production
+yarn build && yarn start:prod
 ```
 
-## API Documentation
+---
 
-Once the app is running, visit `http://localhost:3000/api` to view the Swagger documentation.
+## 📖 API Docs (Swagger)
 
-## Test
+Truy cập [http://localhost:3001/api/docs](http://localhost:3001/api/docs)
 
-```bash
-# unit tests
-$ npm run test
+---
 
-# e2e tests
-$ npm run test:e2e
+## 🔒 Security Checklist
 
-# test coverage
-$ npm run test:cov
-```
+- [x] Helmet (Secure HTTP headers)
+- [x] OAuth2 Login (Google & Facebook)
+- [x] CSRF-safe (or intentionally skipped for OAuth)
+- [x] Rate limiting (Throttler)
+- [x] Input sanitization (`sanitize-html`)
+- [x] Refresh token with rotation
 
-## Security Features
+---
 
-- JWT Authentication
-- Role-based Access Control
-- Request Rate Limiting
-- CORS Protection
-- Helmet Security Headers
-- Input Validation
-- Password Hashing
+## 📬 Contact
 
-## License
+- 👨‍💻 Developer: **Hồ Sỹ Thắng**
+- 📧 Email: [hothang2004@gmail.com](mailto:hothang2004@gmail.com)
+
+---
+
+## 🧩 To-Do / Enhancements
+
+- [ ] Add password reset flow
+- [ ] Admin dashboard with analytics
+- [ ] Add Dockerfile + CI/CD for deployment
+
+---
+
+## 📄 License
 
 This project is licensed under the MIT License.
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+> Made with 💪 by Hồ Sỹ Thắng
