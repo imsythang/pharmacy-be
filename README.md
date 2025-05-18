@@ -41,8 +41,8 @@ src
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/your-username/pharmacy-backend.git
-cd pharmacy-backend
+git clone https://github.com/imsythang/pharmacy-be.git
+cd pharmacy-be
 yarn install
 ```
 
