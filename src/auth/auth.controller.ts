@@ -17,7 +17,7 @@ import { LocalAuthGuard } from './guards/local-auth.guard';
 import { Response, Request as ExpressRequest } from 'express';
 import * as sanitizeHtml from 'sanitize-html';
 import { AuthGuard } from '@nestjs/passport';
-
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
@@ -37,12 +37,21 @@ export class AuthController {
   @ApiResponse({ status: 201, description: 'User registered successfully' })
   @ApiResponse({ status: 400, description: 'Bad request' })
   async register(@Body() registerDto: RegisterDto) {
+    console.log("📥 Body FE gửi lên:", registerDto);
     const sanitizedDto = {
       email: sanitizeHtml(registerDto.email),
       password: registerDto.password,
       name: sanitizeHtml(registerDto.name),
     };
     return this.authService.register(sanitizedDto);
+  }
+  @UseGuards(JwtAuthGuard)
+  @Get('me')
+  @ApiOperation({ summary: 'Lấy thông tin người dùng hiện tại' })
+  @ApiResponse({ status: 200, description: 'Trả về thông tin người dùng' })
+  @ApiResponse({ status: 401, description: 'Không được phép' })
+  async getCurrentUser(@Request() req: ExpressRequest) {
+    return this.authService.login(req.user);
   }
 
   @Get('google')

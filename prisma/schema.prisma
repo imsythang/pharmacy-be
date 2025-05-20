@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -19,26 +13,28 @@ model User {
   password      String?
   name          String
   role          Role     @default(USER)
-  oauthProvider String?  // ✅ thêm
-  oauthId       String?  // ✅ thêm
-  refreshToken  String?  // ✅ thêm
+  oauthProvider String?
+  oauthId       String?
+  refreshToken  String?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   orders        Order[]
+  cart          Cart?    // ✅ Back relation with Cart
 }
 
 model Product {
-  id          String   @id @default(uuid())
+  id          String      @id @default(uuid())
   name        String
   description String
   price       Float
   stock       Int
   imageUrl    String?
-  category    Category @relation(fields: [categoryId], references: [id])
+  category    Category    @relation(fields: [categoryId], references: [id])
   categoryId  String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
   orderItems  OrderItem[]
+  cartItems   CartItem[]  // ✅ Back relation with CartItem
 }
 
 model Category {
@@ -80,6 +76,26 @@ model Article {
   imageUrl  String?
   author    String
   slug      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Cart {
+  id        String      @id @default(uuid())
+  user      User        @relation(fields: [userId], references: [id])
+  userId    String      @unique
+  items     CartItem[]
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+model CartItem {
+  id        String   @id @default(uuid())
+  cart      Cart     @relation(fields: [cartId], references: [id])
+  cartId    String
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+  quantity  Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

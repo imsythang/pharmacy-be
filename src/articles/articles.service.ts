@@ -1,3 +1,4 @@
+//articles.service.ts
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateArticleDto } from './dto/create-article.dto';
@@ -20,11 +21,23 @@ export class ArticlesService {
     orderBy?: Prisma.ArticleOrderByWithRelationInput;
   }) {
     const { skip, take, orderBy } = params;
-    return this.prisma.article.findMany({
-      skip,
-      take,
-      orderBy,
-    });
+
+    const [data, total] = await this.prisma.$transaction([
+      this.prisma.article.findMany({
+        skip,
+        take,
+        orderBy,
+      }),
+      this.prisma.article.count(),
+    ]);
+
+    return {
+      data,
+      total,
+      page: Math.floor((skip ?? 0) / (take ?? total)) + 1,
+      limit: take ?? total,
+      totalPages: Math.ceil(total / (take ?? total)),
+    };
   }
 
   async findOne(id: string) {

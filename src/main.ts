@@ -21,10 +21,10 @@ async function bootstrap() {
   });
 
   // Global validation
-  app.useGlobalPipes(
+  app.useGlobalPipes(vsco
     new ValidationPipe({
       whitelist: true,
-      transform: true,
+      transform: true,sadsa
       forbidNonWhitelisted: true,
       transformOptions: {
         enableImplicitConversion: true,
@@ -48,3 +48,4 @@ async function bootstrap() {
   await app.listen(process.env.PORT ?? 3001); // FE chạy ở 3000 thì BE để 3001
 }
 bootstrap();
+
