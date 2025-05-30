@@ -26,7 +26,7 @@ async function main() {
       slug: 'thuoc-khang-sinh',
     },
   });
-
+  await prisma.article.deleteMany();
   await prisma.category.upsert({
     where: { name: 'Thuốc giảm đau' },
     update: {},
@@ -61,6 +61,26 @@ async function main() {
       content: 'Bài viết về tầm quan trọng của Vitamin C...',
       author: 'Admin',
       slug: 'tam-quan-trong-cua-vitamin-c',
+    },
+  });
+
+  await prisma.article.create({
+    data: {
+      title: 'Cách sử dụng thuốc giảm đau an toàn',
+      content: 'Bài viết về cách sử dụng thuốc giảm đau an toàn...',
+      author: 'Admin',
+      slug: 'cach-su-dung-thuoc-giam-dau-an-toan',
+    },
+  });
+
+  await prisma.article.create({
+    data: {
+      title: 'Tầm quan trọng của nóc nhà',
+      content: 'Thuốc này trị mọi loại bệnh',
+      imageUrl:
+        'https://res.cloudinary.com/dfqc213ff/image/upload/v1747938668/mygirl_brrjlk.jpg',
+      author: 'Hồ Sỹ Thắng',
+      slug: 'cach-lam-chan-am-nem-em',
     },
   });
 }
